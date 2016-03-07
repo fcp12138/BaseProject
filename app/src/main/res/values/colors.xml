@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--base/activity-->
+    <color name="system_bar_default_color">#999999</color>
+    <color name="toolbar_default_color">#999999</color>
+
+
+</resources>
