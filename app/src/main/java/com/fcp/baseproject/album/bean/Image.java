@@ -25,8 +25,7 @@ public class Image implements Parcelable {
     @Override
     public boolean equals(Object o) {
         try {
-            Image other = (Image) o;
-            return this.path.equalsIgnoreCase(other.path);
+            return this.path.equalsIgnoreCase(((Image) o).path);
         }catch (ClassCastException e){
             e.printStackTrace();
         }

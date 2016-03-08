@@ -3,6 +3,7 @@ package com.fcp.baseproject.base.activity;
 import android.view.View;
 import android.widget.FrameLayout;
 
+import com.fcp.baseproject.base.view.CircleProgress;
 import com.fcp.baseproject.base.view.ProgressWheel;
 
 /**
@@ -11,7 +12,7 @@ import com.fcp.baseproject.base.view.ProgressWheel;
  */
 public class ProgressActivity extends ToolbarActivity {
 
-    private ProgressWheel mProgressWheel;
+    private CircleProgress mProgressWheel;
     private View content;
 
     @Override
@@ -20,7 +21,7 @@ public class ProgressActivity extends ToolbarActivity {
         FrameLayout frameLayout = new FrameLayout(this);
         frameLayout.addView(content , FrameLayout.LayoutParams.MATCH_PARENT,FrameLayout.LayoutParams.MATCH_PARENT);
         //进度圈
-        mProgressWheel = new ProgressWheel(this);
+        mProgressWheel = new CircleProgress(this);
         mProgressWheel.setBarColor(0xFF0088FF);
         mProgressWheel.spin();
         frameLayout.addView(mProgressWheel , FrameLayout.LayoutParams.MATCH_PARENT,FrameLayout.LayoutParams.MATCH_PARENT);

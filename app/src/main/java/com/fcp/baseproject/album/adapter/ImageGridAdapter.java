@@ -116,5 +116,17 @@ public abstract class ImageGridAdapter extends BaseAdapter{
         }
     }
 
+    /**
+     * 更新数据
+     */
+    public void updata(List<Image> images){
+        if(images != null && images.size()>0){
+            mImages = images;
+        }else{
+            mImages.clear();
+        }
+        notifyDataSetChanged();
+    }
+
 
 }

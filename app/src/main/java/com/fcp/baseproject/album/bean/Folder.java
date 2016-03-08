@@ -12,11 +12,19 @@ public class Folder {
     public Image cover;
     public List<Image> images;
 
+    public Folder() {
+    }
+
+    public Folder(String name, String path, Image cover) {
+        this.name = name;
+        this.path = path;
+        this.cover = cover;
+    }
+
     @Override
     public boolean equals(Object o) {
         try {
-            Folder other = (Folder) o;
-            return this.path.equalsIgnoreCase(other.path);
+            return this.path.equalsIgnoreCase(((Folder) o).path);
         }catch (ClassCastException e){
             e.printStackTrace();
         }

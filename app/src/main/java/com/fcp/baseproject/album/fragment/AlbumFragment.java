@@ -220,12 +220,8 @@ public abstract class AlbumFragment extends Fragment {
                         } else {
                             Folder folder = (Folder) v.getAdapter().getItem(index);
                             if (null != folder) {
-                                mImageAdapter.setData(folder.images);
+                                mImageAdapter.updata(folder.images);
                                 mCategoryText.setText(folder.name);
-                                // 设定默认选择
-                                if (resultList != null && resultList.size() > 0) {
-                                    mImageAdapter.setDefaultSelected(resultList);
-                                }
                             }
                             mImageAdapter.setShowCamera(false);
                         }
@@ -288,32 +284,26 @@ public abstract class AlbumFragment extends Fragment {
                         images.add(image);
                         if( !hasFolderGened ) {
                             // 获取文件夹名称
-                            File imageFile = new File(path);
-                            File folderFile = imageFile.getParentFile();
-                            Folder folder = new Folder();
-                            folder.name = folderFile.getName();
-                            folder.path = folderFile.getAbsolutePath();
-                            folder.cover = image;
-                            if (!mResultFolder.contains(folder)) {
-                                List<Image> imageList = new ArrayList<>();
-                                imageList.add(image);
-                                folder.images = imageList;
-                                mResultFolder.add(folder);
-                            } else {
-                                // 更新
-                                Folder f = mResultFolder.get(mResultFolder.indexOf(folder));
-                                f.images.add(image);
+                            File folderFile = new File(path).getParentFile();
+                            if(folderFile != null){
+                                Folder folder = new Folder(folderFile.getName(),folderFile.getAbsolutePath(),image);
+                                if (!mResultFolder.contains(folder)) {//如果还没有文件夹,(equal重写过)
+                                    List<Image> imageList = new ArrayList<>();
+                                    imageList.add(image);
+                                    folder.images = imageList;
+                                    mResultFolder.add(folder);
+                                } else {
+                                    // 更新
+                                    Folder f = mResultFolder.get(mResultFolder.indexOf(folder));
+                                    f.images.add(image);
+                                }
                             }
+
                         }
 
                     }while(data.moveToNext());
 
-                    mImageAdapter.setData(images);
-
-                    // 设定默认选择
-                    if(resultList != null && resultList.size()>0){
-                        mImageAdapter.setDefaultSelected(resultList);
-                    }
+                    mImageAdapter.updata(images);
 
                     mFolderAdapter.setData(mResultFolder);
                     hasFolderGened = true;
